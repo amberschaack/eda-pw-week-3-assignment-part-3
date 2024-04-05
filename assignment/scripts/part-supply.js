@@ -45,10 +45,25 @@ for (x = 0; x < supplyChanges.length; x++) {
 console.log('---  Stretch Goals  ---');
 // 7. Rewrite the `for` loop from #6 as a `for of` loop.
 console.log('7. Showing supplyChanges with "for of" loop');
+for (i of supplyChanges) {
+  if (i > 0) {
+    console.log(`Added ${i} parts.`);
+  } else if (i < 0) {
+    console.log(`Removed ${i} parts.`);
+  } else {
+    console.log('No change.');
+  }
+}
 
 // 8. Write a loop to determine the total number of parts available by
 //    adding up all the numbers in the 'supplyChanges' array.
 console.log('8. Total supplies available is:');
+let sumSoFar = 0;
+for (let i = 0; i < supplyChanges.length; i++) {
+  let currentNumber = supplyChanges[i];
+  sumSoFar = sumSoFar + currentNumber;
+}
+console.log(`The total number of parts available is ${sumSoFar}.`);
 
 // 9. We have a large stash of parts in our warehouse that we
 //    need to box up and get ready for shipment.
@@ -57,3 +72,35 @@ console.log('8. Total supplies available is:');
 //    no more boxes can be filled.
 //    Then log how many boxes were filled, and how many parts are left over.
 console.log('9. Filling boxes with a "while" loop');
+/* This was my first thought and I was able to use %, but couldn't figure out how to end the loop at the right time.
+const totalParts = 572;
+let totalBoxes = 0;
+let leftoverParts = 0;
+let parts = 0;
+while (parts <= totalParts) {
+  parts++;
+  if (parts % 7 === 0) {
+    totalBoxes++;
+  }
+}
+leftoverParts = totalParts - parts;
+console.log('Total parts', parts);
+console.log('Total boxes', totalBoxes);
+console.log('Leftover parts', leftoverParts);
+*/
+
+// Here is my second thought, but I didn't implement %.
+let totalParts = 572;
+let boxMax = 7;
+let totalBoxes = 0;
+let partsRemaining = 0;
+while (totalParts >= 0) {
+  totalParts -= boxMax;
+  totalBoxes++;
+  if (totalParts < boxMax) {
+    break;
+  }
+}
+partsRemaining = totalParts;
+console.log('Total full boxes:', totalBoxes);
+console.log('Parts remaining:', partsRemaining);
