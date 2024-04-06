@@ -72,35 +72,22 @@ console.log(`The total number of parts available is ${sumSoFar}.`);
 //    no more boxes can be filled.
 //    Then log how many boxes were filled, and how many parts are left over.
 console.log('9. Filling boxes with a "while" loop');
-/* This was my first thought and I was able to use %, but couldn't figure out how to end the loop at the right time.
-const totalParts = 572;
-let totalBoxes = 0;
-let leftoverParts = 0;
-let parts = 0;
-while (parts <= totalParts) {
-  parts++;
-  if (parts % 7 === 0) {
-    totalBoxes++;
-  }
-}
-leftoverParts = totalParts - parts;
-console.log('Total parts', parts);
-console.log('Total boxes', totalBoxes);
-console.log('Leftover parts', leftoverParts);
-*/
 
-// Here is my second thought, but I didn't implement %.
-let totalParts = 572;
+const totalParts = 572;
 let boxMax = 7;
 let totalBoxes = 0;
-let partsRemaining = 0;
-while (totalParts >= 0) {
-  totalParts -= boxMax;
-  totalBoxes++;
-  if (totalParts < boxMax) {
+let leftoverParts = 0;
+let currentParts = 0;
+
+while (currentParts <= totalParts) {
+  currentParts++;
+  leftoverParts = totalParts - currentParts;
+  if (currentParts % 7 === 0) {
+    totalBoxes++;
+  }
+  if (leftoverParts < boxMax && currentParts % 7 === 0) {
     break;
   }
 }
-partsRemaining = totalParts;
-console.log('Total full boxes:', totalBoxes);
-console.log('Parts remaining:', partsRemaining);
+console.log('Total boxes', totalBoxes);
+console.log('Leftover parts', leftoverParts);
